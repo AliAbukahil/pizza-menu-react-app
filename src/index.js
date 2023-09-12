@@ -68,7 +68,7 @@ function Header() {
 
   return (
     <header className="header footer">
-      <h1 style={style}>Fast React Pizza Co.</h1>
+      <h1 style={style}>Zizfun Pizzaray Co.</h1>
     </header>
   );
 }
@@ -83,12 +83,14 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu</h2>
 
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzas.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>We are still working on our menu. Please come back later ;)</p>
       )}
 
       {/* <Pizza
@@ -129,12 +131,6 @@ function Footer() {
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
 
-  const orderPizza = (
-    <div className="order">
-      <p>"We're open until {closeHour}:00. Come visit us or order online"</p>
-      <button className="btn">Order</button>
-    </div>
-  );
   /*   if (hour >= openHour && hour <= closeHour) {
     alert("We’re currently open!");
   } else alert("We'are closed!"); */
@@ -142,7 +138,22 @@ function Footer() {
   // Writing a component without JSX
   //return React.createElement("footer", null, "We're currently open!");
   // with JSX
-  return <footer className="footer">{isOpen && orderPizza}</footer>;
+  return (
+    <footer className="footer">
+      {isOpen ? (
+        <div className="order">
+          <p>
+            "We're open until {closeHour}:00. Come visit us or order online"
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          "We're happy to welcome you between {openHour}:00 {closeHour}:00.
+        </p>
+      )}
+    </footer>
+  );
 }
 
 // React v18 rendering
